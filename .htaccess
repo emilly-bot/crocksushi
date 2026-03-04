@@ -5,4 +5,17 @@ RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Página inicial padrão
-DirectoryIndex index.html
+DirectoryIndex index.php index.html
+
+# Redireciona index.html para index.php
+RewriteRule ^index\.html$ index.php [R=301,L]
+
+# Protege banco SQLite e config
+RewriteRule ^database\.sqlite$ - [F,L]
+RewriteRule ^config/.*$        - [F,L]
+
+# Bloqueia acesso direto a arquivos sensíveis
+<FilesMatch "\.(sqlite|sql|env)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
