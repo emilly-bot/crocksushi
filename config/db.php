@@ -51,4 +51,18 @@ function initDB(): void {
             created_at   DATETIME     DEFAULT CURRENT_TIMESTAMP
         )
     ");
+    $db->exec("
+        CREATE TABLE IF NOT EXISTS presentes (
+            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome            VARCHAR(200) NOT NULL,
+            descricao       TEXT         DEFAULT '',
+            valor           DECIMAL(10,2) DEFAULT 0,
+            imagem_url      VARCHAR(500)  DEFAULT '',
+            reservado       INTEGER       DEFAULT 0,
+            reservado_por   VARCHAR(120)  DEFAULT '',
+            forma_pagamento VARCHAR(20)   DEFAULT '',
+            reservado_em    DATETIME      DEFAULT NULL,
+            created_at      DATETIME      DEFAULT CURRENT_TIMESTAMP
+        )
+    ");
 }
